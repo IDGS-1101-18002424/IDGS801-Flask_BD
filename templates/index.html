@@ -1,9 +1,9 @@
-{% extends "layout.html" %} 
- 
- {% block content%}
-   {%from "_macros.html" import render_field%}
- 
-   <div class="">
+{% extends "layout.html" %}
+
+{% block content%}
+{%from "_macros.html" import render_field%}
+
+<div class="">
     <div class="">
         <form name="sent" action="/" id="form1" method="POST">
             <div class="">
@@ -21,10 +21,10 @@
                     {{render_field(form.email,class='')}}
                 </div>
             </div>
-            <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
-            <input type="submit" id="reg-alum" name="registra" value="Registrar"/>
+            <input type="hidden" name="csrf_token" value="{{csrf_token()}}" />
+            <input type="submit" id="reg-alum" name="registra" value="Registrar" />
         </form>
     </div>
-   </div>
- 
+</div>
+
 {% endblock %}
