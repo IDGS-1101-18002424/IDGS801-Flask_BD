@@ -1,28 +1,28 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %} {% block content%} {%from "_macros.html" import render_field%}
 
-{% block content%}
-{%from "_macros.html" import render_field%}
-
-<div class="">
+<div id='formulario' class="container">
     <div class="">
         <form name="sent" action="/" id="form1" method="POST">
-            <div class="">
-                <div class="">
-                    {{render_field(form.nombre,class='')}}
+            <div class="row">
+                <div class="w3-col m8 l9">
+                    {{render_field(form.nombre,class='' )}}
                 </div>
             </div>
-            <div class="">
-                <div class="">
+            <div class="row">
+                <div class="w3-col m8 l9">
                     {{render_field(form.apellidos,class='')}}
                 </div>
             </div>
-            <div class="">
-                <div class="">
+            <br>
+            <div class="row">
+                <div class="w3-col m8 l9 s9">
                     {{render_field(form.email,class='')}}
                 </div>
             </div>
-            <input type="hidden" name="csrf_token" value="{{csrf_token()}}" />
-            <input type="submit" id="reg-alum" name="registra" value="Registrar" />
+            <br>
+            <div class="row">
+                <input type="hidden" name="csrf_token" value="{{csrf_token()}}" />
+                <input type="submit" id="reg-alum" name="registra" value="Registrar" /> </div>
         </form>
     </div>
 </div>

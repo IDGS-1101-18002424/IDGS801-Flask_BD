@@ -1,8 +1,5 @@
-{% extends "layout.html" %}
-
-{% block content%}
-{%from "_macros.html" import render_field%}
-<div class="">
+{% extends "layout.html" %} {% block content%} {%from "_macros.html" import render_field%}
+<div class="" style="padding:0 16px;">
     <div class="w3-responsive">
         <h2>Alumnos: IDGS</h2>
         <table class="w3-table-all w3-card-4 w3-large">
@@ -23,7 +20,7 @@
                     <td>{{alumno.nombre}}</td>
                     <td>{{alumno.apellidos}}</td>
                     <td>{{alumno.email}}</td>
-                    
+
 
                     <td><a class="w3-button w3-red w3-btn w3-round-xxlarge" href="eliminar?id={{alumno.id}}">Eliminar</a></td>
                     <td><a class="w3-button w3-blue w3-btn w3-round-xxlarge" href="modificar?id={{alumno.id}}">Modificar</a></td>
