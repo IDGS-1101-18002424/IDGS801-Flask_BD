@@ -10,6 +10,7 @@ csrf = CSRFProtect()
 
 # ----------------------------------------RUTAS-------------------------------------------------------------------------------------------------------------------
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     create_form = forms.UserForm(request.form)
@@ -20,11 +21,12 @@ def index():
                         email=create_form.email.data)
         db.session.add(alumn)
         db.session.commit()
-
+        #return redirect(url_for('ABCompleto'))
     return render_template('index.html', name='Inicio', form=create_form)
 
-#***************************************************** ALUMNOS *********************************************************
+# ***************************************************** ALUMNOS *********************************************************
 # ---------------------------------------------------- GET ALL ---------------------------------------------------------------------------------------
+
 
 @app.route('/ABCompleto', methods=['GET', 'POST'])
 def abcompleto():
@@ -34,6 +36,7 @@ def abcompleto():
     return render_template('ABCompleto.html', form=create_form, alumnos=alumnos, name="ABCompleto")
 
 # ---------------------------------------------------- MODIFICAR --------------------------------------------------------------------------------------
+
 
 @app.route('/modificar', methods=['POST'])
 def modificar():
@@ -60,6 +63,7 @@ def modificar():
 
 # ---------------------------------------------------- ELIMINAR --------------------------------------------------------------------------------------
 
+
 @app.route('/eliminar', methods=['POST'])
 def eliminar():
     create_form = forms.UserForm(request.form)
@@ -83,7 +87,7 @@ def eliminar():
         return redirect(url_for('ABCompleto'))
     return render_template('eliminar.html', form=create_form)
 
-#***************************************************** MAESTROS *********************************************************
+# ***************************************************** MAESTROS *********************************************************
 
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -93,4 +97,4 @@ if __name__ == '__main__':
     db.init_app(app)
     with app.app_context():
         db.create_all()
-    app.run(host='10.1.1.11', port=3000)
+    app.run(port=3000)  # host='10.1.1.11',
