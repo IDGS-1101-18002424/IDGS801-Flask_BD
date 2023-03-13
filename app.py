@@ -16,12 +16,13 @@ def index():
     create_form = forms.UserForm(request.form)
 
     if request.method == 'POST':
-        alumn = Alumnos(nombre=create_form.nombre.data,
-                        apellidos=create_form.apellidos.data,
-                        email=create_form.email.data)
+        alumn = Alumnos(
+            nombre=create_form.nombre.data,
+            apellidos=create_form.apellidos.data,
+            email=create_form.email.data)
         db.session.add(alumn)
         db.session.commit()
-        #return redirect(url_for('ABCompleto'))
+        return redirect(url_for('abcompleto'))
     return render_template('index.html', name='Inicio', form=create_form)
 
 # ***************************************************** ALUMNOS *********************************************************
@@ -38,14 +39,14 @@ def abcompleto():
 # ---------------------------------------------------- MODIFICAR --------------------------------------------------------------------------------------
 
 
-@app.route('/modificar', methods=['POST'])
+@app.route('/modificar', methods=['GET', 'POST'])
 def modificar():
     create_form = forms.UserForm(request.form)
     if request.method == 'GET':
         id = request.args.get('id')
         # SELECT * FROM alumnos where id==id
         alumno = db.session.query(Alumnos).filter(Alumnos.id == id).first()
-        create_form.id.data = id
+        create_form.id.data = request.args.get('id')
         create_form.nombre.data = alumno.nombre
         create_form.apellidos.data = alumno.apellidos
         create_form.email.data = alumno.email
@@ -58,20 +59,19 @@ def modificar():
         alumno.email = create_form.email.data
         db.session.add(alumno)
         db.session.commit()
-        return redirect(url_for('ABCompleto'))
+        return redirect(url_for('abcompleto'))
     return render_template('modificar.html', form=create_form)
-
 # ---------------------------------------------------- ELIMINAR --------------------------------------------------------------------------------------
 
 
-@app.route('/eliminar', methods=['POST'])
+@app.route('/eliminar', methods=['GET', 'POST'])
 def eliminar():
     create_form = forms.UserForm(request.form)
     if request.method == 'GET':
         id = request.args.get('id')
         # SELECT * FROM alumnos where id==id
         alumno = db.session.query(Alumnos).filter(Alumnos.id == id).first()
-        create_form.id.data = id
+        create_form.id.data = request.args.get('id')
         create_form.nombre.data = alumno.nombre
         create_form.apellidos.data = alumno.apellidos
         create_form.email.data = alumno.email
@@ -84,9 +84,8 @@ def eliminar():
         alumno.email = create_form.email.data
         db.session.delete(alumno)
         db.session.commit()
-        return redirect(url_for('ABCompleto'))
+        return redirect(url_for('abcompleto'))
     return render_template('eliminar.html', form=create_form)
-
 # ***************************************************** MAESTROS *********************************************************
 
 
@@ -97,4 +96,4 @@ if __name__ == '__main__':
     db.init_app(app)
     with app.app_context():
         db.create_all()
-    app.run(port=3000)  # host='10.1.1.11',
+    app.run(host='10.1.1.11', port=3000)  # host='10.1.1.11',
